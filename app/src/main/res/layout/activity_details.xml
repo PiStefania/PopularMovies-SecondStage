@@ -6,13 +6,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher_background" />
 
@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Temp Title" />
+            android:id="@+id/title_text_view" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,10 +30,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Release Date" />
+                android:text="@string/details_release_date_title" />
 
             <TextView
-                android:id="@+id/release_date"
+                android:id="@+id/release_date_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -47,10 +47,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vote Average" />
+                android:text="@string/details_vote_average_title" />
 
             <TextView
-                android:id="@+id/vote_average"
+                android:id="@+id/vote_average_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -59,12 +59,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Synopsis" />
+            android:text="@string/details_synopsis_title" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
+            android:layout_height="wrap_content"
+            android:id="@+id/synopsis_text_view"/>
 
     </LinearLayout>
 </ScrollView>
