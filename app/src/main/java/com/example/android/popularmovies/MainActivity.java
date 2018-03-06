@@ -1,40 +1,57 @@
 package com.example.android.popularmovies;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.GridView;
 
-import java.util.Arrays;
+import com.example.android.popularmovies.Utils.ItemDecoration;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
-    private MovieAdapter moviesAdapter;
+public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler{
 
-    Movie[] movies = {
-            new Movie("Cupcake", null, 5),
-            new Movie("Donut",  null ,5),
-            new Movie("Eclair",  null,4),
-            new Movie("Froyo",  null, 5),
-            new Movie("GingerBread",null, 5),
-            new Movie("Honeycomb", null, 5),
-            new Movie("Ice Cream Sandwich", null, 5),
-            new Movie("Jelly Bean",  null, 5),
-            new Movie("KitKat",  null, 5),
-            new Movie("Lollipop",  null, 5)
-    };
+    private static final String LOG_TAG = MainActivity.class.getSimpleName();
+
+    private RecyclerView.Adapter moviesAdapter;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    ArrayList<Movie> movies;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        moviesAdapter = new MovieAdapter(this, Arrays.asList(movies));
+        movies = new ArrayList<Movie>();
+
+        movies.add(new Movie("Cupcake", null, 5));
+        movies.add(new Movie("Donut",  null ,5));
+        movies.add(new Movie("Eclair",  null,4));
+        movies.add(new Movie("Froyo",  null, 5));
+        movies.add(new Movie("GingerBread",null, 5));
+        movies.add(new Movie("Honeycomb", null, 5));
+        movies.add(new Movie("Honeycomb", null, 5));
+        movies.add(new Movie("Honeycomb", null, 5));
+        movies.add(new Movie("Honeycomb", null, 5));
+        movies.add(new Movie("Honeycomb", null, 5));
+
+        moviesAdapter = new MovieAdapter(this,movies,this);
 
         // Get a reference to the ListView, and attach this adapter to it.
-        GridView listView = (GridView) findViewById(R.id.grid_view);
-        listView.setAdapter(moviesAdapter);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing_col);
+        mRecyclerView.addItemDecoration(new ItemDecoration(spacingInPixels));
+
+        mLayoutManager = new GridLayoutManager(getApplicationContext(),2);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(moviesAdapter);
     }
 
 
@@ -48,8 +65,20 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            Intent startSettingsActivity = new Intent(this, SettingsActivity.class);
+            startActivity(startSettingsActivity);
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(String movieTitle) {
+
+        Log.e(LOG_TAG,"MOVIETITLE: ");
+        Intent intentDetails = new Intent(this, DetailsActivity.class);
+        intentDetails.putExtra(Intent.EXTRA_TEXT, movieTitle);
+
+        startActivity(intentDetails);
     }
 }
