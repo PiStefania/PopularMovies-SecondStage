@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 
 public final class NetworkUtils {
-    private static final String API_KEY = "your api";
+    private static final String API_KEY = "your api key";
     private static final String LOG_TAG = NetworkUtils.class.getSimpleName();
     private static final String MOVIES_POPULAR_URL = "https://api.themoviedb.org/3/movie/popular";
     private static final String MOVIES_TOP_RATED_URL = "https://api.themoviedb.org/3/movie/top_rated";
@@ -29,7 +29,6 @@ public final class NetworkUtils {
                 .appendQueryParameter(API_PARAM, API_KEY)
                 .build();
 
-        //Log.e(LOG_TAG,builtUri.toString());
         URL url = null;
         try {
             url = new URL(builtUri.toString());
@@ -56,4 +55,5 @@ public final class NetworkUtils {
             urlConnection.disconnect();
         }
     }
+
 }

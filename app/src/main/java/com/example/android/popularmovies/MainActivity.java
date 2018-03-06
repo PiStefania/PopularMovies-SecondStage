@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private LinearLayout errorConnection;
     private LinearLayout moviesNotFound;
     private ProgressBar loadingIndicator;
     private ArrayList<Movie> mMovies;
@@ -45,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        errorConnection = (LinearLayout)findViewById(R.id.connection_error);
         moviesNotFound = (LinearLayout)findViewById(R.id.movies_not_found);
         loadingIndicator = (ProgressBar)findViewById(R.id.loading_indicator);
 
@@ -67,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         PreferenceManager.getDefaultSharedPreferences(this)
                 .registerOnSharedPreferenceChangeListener(this);
 
-        errorConnection.setVisibility(View.INVISIBLE);
+        moviesNotFound.setVisibility(View.INVISIBLE);
         mRecyclerView.setVisibility(View.VISIBLE);
         getSupportLoaderManager().initLoader(MOVIES_LOADER_ID, null, callback);
 
@@ -92,9 +90,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     }
 
     @Override
-    public void onClick(String movieTitle) {
+    public void onClick(Movie movie) {
         Intent intentDetails = new Intent(this, DetailsActivity.class);
-        intentDetails.putExtra(Intent.EXTRA_TEXT, movieTitle);
+        intentDetails.putExtra("parcel_data", movie);
         startActivity(intentDetails);
     }
 
@@ -138,9 +136,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         moviesAdapter.setMovieData(movies);
         if(movies == null || movies.size()==0){
             mRecyclerView.setVisibility(View.INVISIBLE);
-            errorConnection.setVisibility(View.VISIBLE);
+            moviesNotFound.setVisibility(View.VISIBLE);
         }else{
-            errorConnection.setVisibility(View.INVISIBLE);
+            moviesNotFound.setVisibility(View.INVISIBLE);
             mRecyclerView.setVisibility(View.VISIBLE);
         }
     }

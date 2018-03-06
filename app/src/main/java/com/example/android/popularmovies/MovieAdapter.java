@@ -26,7 +26,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     }
 
     public interface MovieAdapterOnClickHandler {
-        void onClick(String movieTitle);
+        void onClick(Movie movie);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -40,8 +40,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            String movieTitle = mMovies.get(position).getTitle();
-            mClickHandler.onClick(movieTitle);
+            mClickHandler.onClick(mMovies.get(position));
         }
     }
 
@@ -57,7 +56,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position){
-        Picasso.with(mContext).load(mMovies.get(position).getImageUrl()).into(holder.mThumbnail);
+        Picasso.with(mContext).load(mMovies.get(position).getPosterUrl()).into(holder.mThumbnail);
     }
 
     @Override
