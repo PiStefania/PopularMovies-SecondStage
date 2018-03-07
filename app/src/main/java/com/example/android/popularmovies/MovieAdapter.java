@@ -11,6 +11,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
     private Context mContext;
@@ -30,10 +33,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public ImageView mThumbnail;
+        @BindView(R.id.thumbnail) ImageView mThumbnail;
         public ViewHolder(View v){
             super(v);
-            mThumbnail = (ImageView) v.findViewById(R.id.thumbnail);
+            ButterKnife.bind(this, v);
             v.setOnClickListener(this);
         }
 
@@ -49,7 +52,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public MovieAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         // Create a new View
         View v = LayoutInflater.from(mContext).inflate(R.layout.list_item,parent,false);
-        int height = parent.getMeasuredHeight() / 2;
+        int orientation = mContext.getResources().getConfiguration().orientation;
+        int height;
+        if(orientation == 1){
+            height = parent.getMeasuredHeight() / 2;
+        }
+        else{
+            height = parent.getMeasuredHeight();
+        }
         v.setMinimumHeight(height);
         return new ViewHolder(v);
     }

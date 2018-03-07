@@ -11,38 +11,38 @@
         tools:context="com.example.android.popularmovies.MainActivity" />
 
     <ProgressBar
+        android:id="@+id/loading_indicator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"
-        android:id="@+id/loading_indicator"/>
+        android:visibility="invisible" />
 
     <LinearLayout
+        android:id="@+id/movies_not_found"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"
-        android:orientation="vertical"
-        android:id="@+id/movies_not_found"
         android:layout_gravity="center"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="invisible">
 
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/movie_reel"
+            android:layout_gravity="center"
             android:scaleType="centerInside"
-            android:layout_gravity="center" />
+            android:src="@drawable/movie_reel" />
 
         <TextView
-            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-light"
-            android:textSize="24sp"
-            android:gravity="center"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="@string/movies_not_found"/>
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_views"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:text="@string/movies_not_found"
+            android:textSize="@dimen/not_found_title"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

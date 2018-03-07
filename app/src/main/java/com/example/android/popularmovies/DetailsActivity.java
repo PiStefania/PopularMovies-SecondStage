@@ -8,25 +8,22 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DetailsActivity extends AppCompatActivity{
 
-    private TextView mTitle;
-    private TextView mReleaseDate;
-    private TextView mSynopsis;
-    private TextView mVoteAverage;
-    private ImageView mPoster;
+    @BindView(R.id.title_text_view) TextView mTitle;
+    @BindView(R.id.release_date_text_view) TextView mReleaseDate;
+    @BindView(R.id.synopsis_text_view) TextView mSynopsis;
+    @BindView(R.id.vote_average_text_view) TextView mVoteAverage;
+    @BindView(R.id.poster_image_view) ImageView mPoster;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-
+        ButterKnife.bind(this);
         Movie movie = (Movie) getIntent().getParcelableExtra("parcel_data");
-
-        mTitle = findViewById(R.id.title_text_view);
-        mReleaseDate = findViewById(R.id.release_date_text_view);
-        mSynopsis = findViewById(R.id.synopsis_text_view);
-        mVoteAverage = findViewById(R.id.vote_average_text_view);
-        mPoster = findViewById(R.id.poster_image_view);
 
         mTitle.setText(movie.getTitle());
         mReleaseDate.setText(movie.getReleaseDate());

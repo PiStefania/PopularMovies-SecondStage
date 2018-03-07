@@ -24,16 +24,19 @@ import com.example.android.popularmovies.Utils.NetworkUtils;
 import java.net.URL;
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler,LoaderManager.LoaderCallbacks<ArrayList<Movie>>,SharedPreferences.OnSharedPreferenceChangeListener{
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     private MovieAdapter moviesAdapter;
-    private RecyclerView mRecyclerView;
+    @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private LinearLayout moviesNotFound;
-    private ProgressBar loadingIndicator;
+    @BindView(R.id.movies_not_found) LinearLayout moviesNotFound;
+    @BindView(R.id.loading_indicator) ProgressBar loadingIndicator;
     private ArrayList<Movie> mMovies;
 
     private static final int MOVIES_LOADER_ID = 1;
@@ -43,15 +46,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        moviesNotFound = (LinearLayout)findViewById(R.id.movies_not_found);
-        loadingIndicator = (ProgressBar)findViewById(R.id.loading_indicator);
+        ButterKnife.bind(this);
 
         mMovies = new ArrayList<>();
 
         moviesAdapter = new MovieAdapter(this,mMovies,this);
-
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing_col);
         mRecyclerView.addItemDecoration(new ItemDecoration(spacingInPixels));
         mRecyclerView.setHasFixedSize(true);

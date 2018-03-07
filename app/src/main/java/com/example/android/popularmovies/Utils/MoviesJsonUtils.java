@@ -42,8 +42,8 @@ public final class MoviesJsonUtils {
 
             String title = movieDetails.getString(TITLE_TAG);
             double voteAverage = movieDetails.getDouble(VOTE_AVERAGE_TAG);
-            String imageUrl = returnFormattedImageUrl(movieDetails.getString(IMAGE_TAG));
-            String backdropUrl = returnFormattedImageUrl(movieDetails.getString(BACKDROP_URL_TAG));
+            String imageUrl = returnFormattedImageUrlThumbnail(movieDetails.getString(IMAGE_TAG));
+            String backdropUrl = returnFormattedImageUrlBackdrop(movieDetails.getString(BACKDROP_URL_TAG));
             String releaseDate = movieDetails.getString(RELEASE_DATE_TAG);
             String synopsis = movieDetails.getString(SYNOPSIS_TAG);
 
@@ -54,9 +54,16 @@ public final class MoviesJsonUtils {
         return movies;
     }
 
-    private static String returnFormattedImageUrl(String posterPath){
+    private static String returnFormattedImageUrlThumbnail(String posterPath){
         String url =  "http://image.tmdb.org/t/p/";
         url += "w342";
+        url += posterPath;
+        return url;
+    }
+
+    private static String returnFormattedImageUrlBackdrop(String posterPath){
+        String url =  "http://image.tmdb.org/t/p/";
+        url += "w780";
         url += posterPath;
         return url;
     }
