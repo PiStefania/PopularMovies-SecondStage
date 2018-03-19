@@ -24,17 +24,19 @@ import com.example.android.popularmovies.Utils.NetworkUtils;
 import java.net.URL;
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler,LoaderManager.LoaderCallbacks<ArrayList<Movie>>,SharedPreferences.OnSharedPreferenceChangeListener{
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     private MovieAdapter moviesAdapter;
-    private RecyclerView mRecyclerView;
+    @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private LinearLayout errorConnection;
-    private LinearLayout moviesNotFound;
-    private ProgressBar loadingIndicator;
+    @BindView(R.id.movies_not_found) LinearLayout moviesNotFound;
+    @BindView(R.id.loading_indicator) ProgressBar loadingIndicator;
     private ArrayList<Movie> mMovies;
 
     private static final int MOVIES_LOADER_ID = 1;
@@ -44,16 +46,11 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        errorConnection = (LinearLayout)findViewById(R.id.connection_error);
-        moviesNotFound = (LinearLayout)findViewById(R.id.movies_not_found);
-        loadingIndicator = (ProgressBar)findViewById(R.id.loading_indicator);
+        ButterKnife.bind(this);
 
         mMovies = new ArrayList<>();
 
         moviesAdapter = new MovieAdapter(this,mMovies,this);
-
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing_col);
         mRecyclerView.addItemDecoration(new ItemDecoration(spacingInPixels));
         mRecyclerView.setHasFixedSize(true);
@@ -67,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         PreferenceManager.getDefaultSharedPreferences(this)
                 .registerOnSharedPreferenceChangeListener(this);
 
-        errorConnection.setVisibility(View.INVISIBLE);
+        moviesNotFound.setVisibility(View.INVISIBLE);
         mRecyclerView.setVisibility(View.VISIBLE);
         getSupportLoaderManager().initLoader(MOVIES_LOADER_ID, null, callback);
 
@@ -92,9 +89,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     }
 
     @Override
-    public void onClick(String movieTitle) {
+    public void onClick(Movie movie) {
         Intent intentDetails = new Intent(this, DetailsActivity.class);
-        intentDetails.putExtra(Intent.EXTRA_TEXT, movieTitle);
+        intentDetails.putExtra("parcel_data", movie);
         startActivity(intentDetails);
     }
 
@@ -138,9 +135,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         moviesAdapter.setMovieData(movies);
         if(movies == null || movies.size()==0){
             mRecyclerView.setVisibility(View.INVISIBLE);
-            errorConnection.setVisibility(View.VISIBLE);
+            moviesNotFound.setVisibility(View.VISIBLE);
         }else{
-            errorConnection.setVisibility(View.INVISIBLE);
+            moviesNotFound.setVisibility(View.INVISIBLE);
             mRecyclerView.setVisibility(View.VISIBLE);
         }
     }

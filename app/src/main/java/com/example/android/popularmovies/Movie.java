@@ -1,18 +1,59 @@
 package com.example.android.popularmovies;
 
-public class Movie {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Movie implements Parcelable {
     private String title;
     private String posterUrl;
     private String backdropUrl;
-    private int voteAverage;
+    private double voteAverage;
     private String releaseDate;
     private String synopsis;
 
-    public Movie(String title,String posterUrl,int voteAverage){
+    public Movie(String title,String posterUrl,double voteAverage,String backdropUrl,String releaseDate,String synopsis){
         this.title = title;
         this.posterUrl = posterUrl;
         this.voteAverage = voteAverage;
+        this.backdropUrl = backdropUrl;
+        this.releaseDate = releaseDate;
+        this.synopsis = synopsis;
     }
+
+    public Movie(Parcel in) {
+        this.title = in.readString();
+        this.posterUrl = in.readString();
+        this.voteAverage = in.readDouble();
+        this.backdropUrl = in.readString();
+        this.releaseDate = in.readString();
+        this.synopsis = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.title);
+        dest.writeString(this.posterUrl);
+        dest.writeDouble(this.voteAverage);
+        dest.writeString(this.backdropUrl);
+        dest.writeString(this.releaseDate);
+        dest.writeString(this.synopsis);
+    }
+
+    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>(){
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
+        }
+
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
+
 
     public void setTitle(String title) {
         this.title = title;
@@ -46,7 +87,7 @@ public class Movie {
         return posterUrl;
     }
 
-    public int getVoteAverage() {
+    public double getVoteAverage() {
         return voteAverage;
     }
 
@@ -64,6 +105,6 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "Title: " + title + " Vote Average: " + voteAverage + " image url: " + posterUrl;
+        return "Title: " + title + " Vote Average: " + voteAverage + " image url: " + posterUrl + " backdrop_url:" + backdropUrl + " release date: " + releaseDate + " synopsis: " + synopsis;
     }
 }

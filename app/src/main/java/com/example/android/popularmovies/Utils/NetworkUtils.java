@@ -29,7 +29,6 @@ public final class NetworkUtils {
                 .appendQueryParameter(API_PARAM, API_KEY)
                 .build();
 
-        //Log.e(LOG_TAG,builtUri.toString());
         URL url = null;
         try {
             url = new URL(builtUri.toString());
@@ -56,4 +55,5 @@ public final class NetworkUtils {
             urlConnection.disconnect();
         }
     }
+
 }

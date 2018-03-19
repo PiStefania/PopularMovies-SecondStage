@@ -11,60 +11,121 @@
 
 
         <ImageView
+            android:id="@+id/poster_image_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background" />
+            android:layout_height="@dimen/poster_height"
+            android:scaleType="centerCrop" />
 
 
         <TextView
+            android:id="@+id/title_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/title_text_view" />
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/margin_views"
+            android:layout_marginRight="@dimen/margin_views"
+            android:layout_marginTop="@dimen/margin_views"
+
+            android:fontFamily="sans-serif-light"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/title_size"
+            android:textStyle="italic" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_views"
+            android:layout_marginRight="@dimen/margin_views"
+            android:layout_marginTop="@dimen/margin_views"
             android:orientation="horizontal">
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/details_release_date_title" />
+                android:src="@drawable/ic_date_range_black_48dp" />
+
+            <TextView
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:text="@string/details_release_date_title"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/other_titles_size" />
 
             <TextView
                 android:id="@+id/release_date_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:textColor="@android:color/black" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_views"
+            android:layout_marginRight="@dimen/margin_views"
+            android:layout_marginTop="@dimen/margin_views"
             android:orientation="horizontal">
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/details_vote_average_title" />
+                android:src="@drawable/ic_stars_black_48dp" />
+
+
+            <TextView
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:text="@string/details_vote_average_title"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/other_titles_size" />
 
             <TextView
                 android:id="@+id/vote_average_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:textColor="@android:color/black" />
 
         </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/details_synopsis_title" />
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/margin_views"
+            android:layout_marginRight="@dimen/margin_views"
+            android:layout_marginTop="@dimen/margin_views"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:text="@string/details_synopsis_title"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/other_titles_size" />
 
         <TextView
+            android:id="@+id/synopsis_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/synopsis_text_view"/>
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_views"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:textColor="@android:color/black" />
 
     </LinearLayout>
 </ScrollView>

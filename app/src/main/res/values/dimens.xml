@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="spacing_col">5dp</dimen>
+    <dimen name="margin_views">8dp</dimen>
+    <dimen name="zero_dp">0dp</dimen>
+
+    <!-- activity_main -->
+    <dimen name="not_found_title">24sp</dimen>
+
+    <!-- activity_details -->
+    <dimen name="poster_height">200dp</dimen>
+    <dimen name="title_size">24sp</dimen>
+    <dimen name="other_titles_size">16sp</dimen>
+
 </resources>

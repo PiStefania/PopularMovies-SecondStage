@@ -6,14 +6,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
 
 public final class MoviesJsonUtils {
 
+    public static int STATUS_CODE;
+
     private static final String LOG_TAG = MoviesJsonUtils.class.getSimpleName();
     public static ArrayList<Movie> getResultsFromJson(String moviesJsonStr) throws JSONException {
 
+        final int HTTP_NOT_FOUND = 7;
+        final int HTTP_UNAUTHORIZED = 34;
         final String STATUS_CODE_TAG = "status_code";
         final String RESULTS_TAG = "results";
         final String TITLE_TAG = "title";
@@ -28,18 +31,8 @@ public final class MoviesJsonUtils {
 
         //error
         if (movieJson.has(STATUS_CODE_TAG)) {
-            int statusCode = movieJson.getInt(STATUS_CODE_TAG);
-
-            switch (statusCode) {
-                case HttpURLConnection.HTTP_OK:
-                    break;
-                case HttpURLConnection.HTTP_NOT_FOUND:
-                    return null;
-                case HttpURLConnection.HTTP_UNAUTHORIZED:
-                    return null;
-                default:
-                    return null;
-            }
+            STATUS_CODE = movieJson.getInt(STATUS_CODE_TAG);
+            return null;
         }
 
         JSONArray movieArrayResults = movieJson.getJSONArray(RESULTS_TAG);
@@ -48,20 +41,29 @@ public final class MoviesJsonUtils {
             JSONObject movieDetails = movieArrayResults.getJSONObject(i);
 
             String title = movieDetails.getString(TITLE_TAG);
-            int voteAverage = movieDetails.getInt(VOTE_AVERAGE_TAG);
-            String imageUrl = movieDetails.getString(IMAGE_TAG);
-            imageUrl = returnFormattedImageUrl(imageUrl);
+            double voteAverage = movieDetails.getDouble(VOTE_AVERAGE_TAG);
+            String imageUrl = returnFormattedImageUrlThumbnail(movieDetails.getString(IMAGE_TAG));
+            String backdropUrl = returnFormattedImageUrlBackdrop(movieDetails.getString(BACKDROP_URL_TAG));
+            String releaseDate = movieDetails.getString(RELEASE_DATE_TAG);
+            String synopsis = movieDetails.getString(SYNOPSIS_TAG);
 
-            Movie movie = new Movie(title,imageUrl,voteAverage);
+            Movie movie = new Movie(title,imageUrl,voteAverage,backdropUrl,releaseDate,synopsis);
             movies.add(movie);
         }
 
         return movies;
     }
 
-    private static String returnFormattedImageUrl(String posterPath){
+    private static String returnFormattedImageUrlThumbnail(String posterPath){
         String url =  "http://image.tmdb.org/t/p/";
         url += "w342";
+        url += posterPath;
+        return url;
+    }
+
+    private static String returnFormattedImageUrlBackdrop(String posterPath){
+        String url =  "http://image.tmdb.org/t/p/";
+        url += "w780";
         url += posterPath;
         return url;
     }
