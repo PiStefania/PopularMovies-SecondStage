@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Popular Movies</string>
     <string name="action_settings">Settings</string>
+    <string name="action_details">Details</string>
 
     <string name="pref_sort_option_popular">Popular Movies</string>
     <string name="pref_sort_option_most_rated">Most Rated</string>
@@ -16,6 +17,12 @@
     <string name="details_release_date_title"><u>Release Date</u></string>
     <string name="details_synopsis_title"><u>Synopsis</u></string>
     <string name="details_vote_average_title"><u>Vote Average</u></string>
+    <string name="details_trailers_title"><u>Trailers</u></string>
+    <string name="details_reviews_title"><u>Reviews</u></string>
     <string name="movies_not_found">Movies were not found!</string>
+
+    <string name="not_found_favourites">No favourites found.</string>
+
+    <string name="content_authority">com.example.android.popularmoviesstage2</string>
 
 </resources>
